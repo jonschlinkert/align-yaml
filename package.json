@@ -1,0 +1,46 @@
+{
+  "name": "align-yaml",
+  "description": "Format, prettify, align, whatever you want to call it. This does that to YAML.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/align-yaml",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "http://github.com/jonschlinkert/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/align-yaml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/align-yaml/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jonschlinkert/align-yaml/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "docs",
+    "documentation",
+    "generate",
+    "generator",
+    "markdown",
+    "templates",
+    "verb"
+  ],
+  "engines": {
+    "node": ">=0.8"
+  },
+  "scripts": {
+    "test": "mocha -R test"
+  },
+  "devDependencies": {
+    "verb": "~0.1.20",
+    "chai": "~1.9.1"
+  },
+  "dependencies": {
+    "repeat-string": "~0.1.0",
+    "longest": "~0.2.1"
+  }
+}
