@@ -1,4 +1,3 @@
-var file = require('fs-utils');
 var expect = require('chai').expect;
 var align = require('../');
 

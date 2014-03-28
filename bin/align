@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+
+const fs   = require('fs');
+const cwd  = require('cwd');
+const log  = require('verbalize');
+const argv = require('minimist')(process.argv.slice(2));
+
+
+/**
+ * align-yaml
+ *
+ * @type {Object}
+ */
+
+var align  = require('../');
+
+
+/**
+ * Set the `runner` for verbalize
+ */
+
+log.runner = 'align-yaml';
+
+// Run with verbose logging
+log.mode.verbose = argv.v || argv.verbose || false;
+
+
+/**
+ * Args
+ */
+
+var src  = argv._[0] || argv.s || argv.src,
+    dest = argv._[1] || argv.d || argv.dest;
+
+if (!src) {
+  log.error('Please provide a source file, either as a first argument or with `-s`');
+}
+
+if (!src) {
+  log.error('Please provide a destination, either as a second argument or with `-d`');
+}
+
+/**
+ * Announce start
+ */
+
+log.writeln();
+log.bold('  ' + log.runner, 'reading', src);
+
+
+// align package.json
+var alignYaml = function(filepath) {
+  return fs.readFileSync(cwd(filepath)).toString();
+};
+
+// Write the file
+fs.writeFileSync(cwd(dest), alignYaml(src));
+
+
+/**
+ * Success message.
+ */
+
+log.writeln();
+log.success('  ' + log.runner + ' [done]');

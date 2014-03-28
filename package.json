@@ -1,7 +1,7 @@
 {
   "name": "align-yaml",
   "description": "Format, prettify, align, whatever you want to call it. This does that to YAML.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/align-yaml",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,6 +29,9 @@
     "templates",
     "verb"
   ],
+  "bin": {
+    "align": "./bin/align"
+  },
   "engines": {
     "node": ">=0.8"
   },
@@ -36,6 +39,9 @@
     "test": "mocha -R test"
   },
   "devDependencies": {
+    "cwd": "~0.1.0",
+    "verbalize": "~0.1.0",
+    "minimist": "~0.0.8",
     "verb": "~0.1.20",
     "chai": "~1.9.1"
   },
