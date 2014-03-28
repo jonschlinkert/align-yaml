@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const fs   = require('fs');
+const path = require('path');
 const cwd  = require('cwd');
 const log  = require('verbalize');
 const argv = require('minimist')(process.argv.slice(2));
-
 
 /**
  * align-yaml
@@ -49,12 +49,12 @@ log.bold('  ' + log.runner, 'reading', src);
 
 
 // align package.json
-var alignYaml = function(filepath) {
-  return fs.readFileSync(cwd(filepath)).toString();
+var readFile = function(filepath) {
+  return fs.readFileSync(path.join(cwd, filepath)).toString();
 };
 
 // Write the file
-fs.writeFileSync(cwd(dest), alignYaml(src));
+fs.writeFileSync(path.join(cwd, dest), align(readFile(src)));
 
 
 /**
