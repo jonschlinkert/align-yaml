@@ -2,7 +2,6 @@
 
 const fs   = require('fs');
 const path = require('path');
-const cwd  = require('cwd');
 const log  = require('verbalize');
 const argv = require('minimist')(process.argv.slice(2));
 
@@ -30,14 +29,16 @@ log.mode.verbose = argv.v || argv.verbose || false;
  */
 
 var src  = argv._[0] || argv.s || argv.src,
-    dest = argv._[1] || argv.d || argv.dest;
+    dest = argv._[1] || argv.d || argv.dest,
+    pad  = argv._[2] || argv.p || argv.pad || 0;
+
 
 if (!src) {
   log.error('Please provide a source file, either as a first argument or with `-s`');
 }
 
-if (!src) {
-  log.error('Please provide a destination, either as a second argument or with `-d`');
+if (!dest) {
+  dest = src;
 }
 
 /**
@@ -50,11 +51,11 @@ log.bold('  ' + log.runner, 'reading', src);
 
 // align package.json
 var readFile = function(filepath) {
-  return fs.readFileSync(path.join(cwd, filepath)).toString();
+  return fs.readFileSync(path.join(process.cwd(), filepath)).toString();
 };
 
 // Write the file
-fs.writeFileSync(path.join(cwd, dest), align(readFile(src)));
+fs.writeFileSync(path.join(process.cwd(), dest), align(readFile(src), pad));
 
 
 /**
