@@ -6,7 +6,7 @@ module.exports = function(str, pad) {
   var longest = getLongest(props).length + (pad || 0);
 
   return str.split('\n').map(function(str) {
-    var line = /^((?:[^#][\s\S])+:?)\s+([^>\|].+)/;
+    var line = /^(\s*.+[^:#]: )\s+(.+)/;
 
     return str.replace(line, function(match, $1, $2) {
       var len = longest - $1.length + 1;
