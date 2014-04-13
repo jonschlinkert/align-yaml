@@ -4,34 +4,18 @@ const fs   = require('fs');
 const path = require('path');
 const log  = require('verbalize');
 const argv = require('minimist')(process.argv.slice(2));
+const align  = require('../');
 
-/**
- * align-yaml
- *
- * @type {Object}
- */
-
-var align  = require('../');
-
-
-/**
- * Set the `runner` for verbalize
- */
-
+// Verbalize `runner`
 log.runner = 'align-yaml';
 
 // Run with verbose logging
 log.mode.verbose = argv.v || argv.verbose || false;
 
-
-/**
- * Args
- */
-
+// Args
 var src  = argv._[0] || argv.s || argv.src,
     dest = argv._[1] || argv.d || argv.dest,
     pad  = argv._[2] || argv.p || argv.pad || 0;
-
 
 if (!src) {
   log.error('Please provide a source file, either as a first argument or with `-s`');
@@ -53,6 +37,9 @@ log.bold('  ' + log.runner, 'reading', src);
 var readFile = function(filepath) {
   return fs.readFileSync(path.join(process.cwd(), filepath)).toString();
 };
+
+console.log(align(readFile(src), pad));
+
 
 // Write the file
 fs.writeFileSync(path.join(process.cwd(), dest), align(readFile(src), pad));
