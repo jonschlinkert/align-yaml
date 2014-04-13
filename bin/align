@@ -1,53 +1,35 @@
 #!/usr/bin/env node
 
-const fs   = require('fs');
-const path = require('path');
+const file = require('fs-utils');
 const log  = require('verbalize');
 const argv = require('minimist')(process.argv.slice(2));
 const align  = require('../');
 
 // Verbalize `runner`
 log.runner = 'align-yaml';
+log.writeln();
+log.subhead('starting', '*');
+
 
 // Run with verbose logging
 log.mode.verbose = argv.v || argv.verbose || false;
 
 // Args
-var src  = argv._[0] || argv.s || argv.src,
-    dest = argv._[1] || argv.d || argv.dest,
-    pad  = argv._[2] || argv.p || argv.pad || 0;
+var src      = argv._[0] || argv.s || argv.src,
+    dest     = argv._[1] || argv.d || argv.dest,
+    padding  = argv._[2] || argv.p || argv.pad || 0;
 
 if (!src) {
-  log.error('Please provide a source file, either as a first argument or with `-s`');
+  src = '*.{yml,yaml}';
 }
 
-if (!dest) {
-  dest = src;
-}
+file.expand(src).forEach(function(filepath) {
+  log.inform('aligning', filepath);
+  var content = file.readFileSync(filepath);
 
-/**
- * Announce start
- */
+  file.writeFileSync(filepath, align(content, padding));
+});
 
+// Success message.
 log.writeln();
-log.bold('  ' + log.runner, 'reading', src);
-
-
-// align package.json
-var readFile = function(filepath) {
-  return fs.readFileSync(path.join(process.cwd(), filepath)).toString();
-};
-
-console.log(align(readFile(src), pad));
-
-
-// Write the file
-fs.writeFileSync(path.join(process.cwd(), dest), align(readFile(src), pad));
-
-
-/**
- * Success message.
- */
-
-log.writeln();
-log.success('  ' + log.runner + ' [done]');
+log.done('Done');

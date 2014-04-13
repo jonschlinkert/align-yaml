@@ -1,7 +1,7 @@
 {
   "name": "align-yaml",
-  "description": "Format, prettify, align, whatever you want to call it. This does that to YAML.",
-  "version": "0.1.7",
+  "description": "Format, prettify, align, whatever you want to call it. This does that to YAML. Great for making long config files more readable!",
+  "version": "0.1.8",
   "homepage": "https://github.com/jonschlinkert/align-yaml",
   "author": {
     "name": "Jon Schlinkert",
@@ -21,13 +21,11 @@
     }
   ],
   "keywords": [
-    "docs",
-    "documentation",
-    "generate",
-    "generator",
-    "markdown",
-    "templates",
-    "verb"
+    "yaml",
+    "format",
+    "beautify",
+    "prettify",
+    "align"
   ],
   "main": "index.js",
   "bin": {
@@ -44,10 +42,10 @@
     "chai": "~1.9.1"
   },
   "dependencies": {
-    "cwd": "~0.1.0",
-    "verbalize": "~0.1.0",
+    "fs-utils": "~0.4.0",
+    "longest": "~0.2.1",
     "minimist": "~0.0.8",
     "repeat-string": "~0.1.0",
-    "longest": "~0.2.1"
+    "verbalize": "~0.1.2"
   }
 }
